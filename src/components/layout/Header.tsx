@@ -1,4 +1,5 @@
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 import Navigation from './Navigation';
@@ -8,7 +9,14 @@ interface HeaderProps {
   mobileMenuOpen: boolean;
 }
 
-const HeartPulseLogo = ({
+interface HeartPulseLogoProps {
+  size?: number;
+  color?: string;
+  pulseColor?: string;
+  fillColor?: string;
+}
+
+const HeartPulseLogo: React.FC<HeartPulseLogoProps> = ({
   size = 40,
   color = 'currentColor',
   pulseColor = 'currentColor',
@@ -24,11 +32,11 @@ const HeartPulseLogo = ({
     strokeWidth="4"
     strokeLinecap="round"
     strokeLinejoin="round"
+    aria-hidden
+    role="img"
   >
     {/* قلب مليان */}
-    <path
-      d="M32 58s26-15.4 26-33.5S41.5 6 32 16 6 24.5 6 24.5 6 42.5 32 58z"
-    />
+    <path d="M32 58s26-15.4 26-33.5S41.5 6 32 16 6 24.5 6 24.5 6 42.5 32 58z" />
     {/* خط النبض */}
     <polyline
       points="16 34 24 34 28 26 32 38 36 22 40 34 48 34"
@@ -39,8 +47,7 @@ const HeartPulseLogo = ({
   </svg>
 );
 
-const Header = ({ toggleMobileMenu, mobileMenuOpen }: HeaderProps) => {
-  const location = useLocation();
+const Header: React.FC<HeaderProps> = ({ toggleMobileMenu, mobileMenuOpen }) => {
   const { theme, toggleTheme } = useTheme();
   const isDark = theme === 'dark';
 
@@ -51,9 +58,7 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen }: HeaderProps) => {
   return (
     <header
       className={`sticky top-0 z-50 w-full transition-colors duration-300 ${
-        isDark
-          ? 'bg-gray-900 border-b border-gray-800'
-          : 'bg-white border-b border-gray-200'
+        isDark ? 'bg-gray-900 border-b border-gray-800' : 'bg-white border-b border-gray-200'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -61,17 +66,10 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen }: HeaderProps) => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
             <span className="h-10 w-10 flex items-center justify-center">
-              <HeartPulseLogo
-                size={40}
-                color={logoColor}
-                pulseColor={pulseColor}
-                fillColor="none" // تعبئة شفافة
-              />
+              <HeartPulseLogo size={40} color={logoColor} pulseColor={pulseColor} fillColor="none" />
             </span>
             <span
-              className={`text-lg font-extrabold ${
-                isDark ? 'text-white' : 'text-gray-900'
-              }`}
+              className={`text-lg font-extrabold ${isDark ? 'text-white' : 'text-gray-900'}`}
               style={{ letterSpacing: '0.03em' }}
             >
               Dr. Mohamed Abdelsaboor
@@ -86,24 +84,22 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen }: HeaderProps) => {
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-full transition-colors ${
-                isDark
-                  ? 'text-yellow-400 hover:text-yellow-300'
-                  : 'text-gray-600 hover:text-gray-900'
+                isDark ? 'text-yellow-400 hover:text-yellow-300' : 'text-gray-600 hover:text-gray-900'
               }`}
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </button>
 
-            {/* CV Download Button */}
+            {/* CV Download Button (fixed: added opening <a>) */}
             <a
-              href="/assets/Dr-Mohamed-Abdelsaboor-CV.pdf"
+              href="/DR-Mohamed-Abdelsaboor-Portfolio-Site/Dr-Mohamed-Abdelsaboor-CV.pdf"
               className={`inline-flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors ${
-                isDark
-                  ? 'bg-primary-500 text-white hover:bg-primary-600'
-                  : 'bg-primary-500 text-white hover:bg-primary-600'
+                isDark ? 'bg-primary-500 text-white hover:bg-primary-600' : 'bg-primary-500 text-white hover:bg-primary-600'
               }`}
-              download
+              download="Dr-Mohamed-Abdelsaboor-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label="Download Dr. Mohamed Abdelsaboor CV"
             >
               Download CV
@@ -115,9 +111,7 @@ const Header = ({ toggleMobileMenu, mobileMenuOpen }: HeaderProps) => {
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-full transition-colors ${
-                isDark
-                  ? 'text-yellow-400 hover:text-yellow-300'
-                  : 'text-gray-600 hover:text-gray-900'
+                isDark ? 'text-yellow-400 hover:text-yellow-300' : 'text-gray-600 hover:text-gray-900'
               }`}
               aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
             >

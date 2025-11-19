@@ -1,16 +1,19 @@
+import React from 'react';
 import { Heart, Mail, Phone, MapPin } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
-const Footer = () => {
+const Footer: React.FC = () => {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
   
   return (
-    <footer className={`py-8 transition-colors ${
-      isDark 
-        ? 'bg-gray-900 border-t border-gray-800' 
-        : 'bg-white border-t border-gray-200'
-    }`}>
+    <footer
+      className={`py-8 transition-colors ${
+        isDark
+          ? 'bg-gray-900 border-t border-gray-800'
+          : 'bg-white border-t border-gray-200'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
@@ -52,9 +55,12 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className={`space-y-2 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>
               <li>
+                {/* Fixed: added the missing opening <a> tag */}
                 <a
-                  href="/assets/Dr-Mohamed-Abdelsaboor-CV.pdf"
-                  download
+                  href="/DR-Mohamed-Abdelsaboor-Portfolio-Site/Dr-Mohamed-Abdelsaboor-CV.pdf"
+                  download="Dr-Mohamed-Abdelsaboor-CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={`inline-block px-4 py-2 rounded-md text-sm font-medium transition-colors ${
                     isDark
                       ? 'bg-primary-600 text-white hover:bg-primary-700'
@@ -73,7 +79,7 @@ const Footer = () => {
         } text-sm text-center`}>
           <p className="flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm">
             <span>© {new Date().getFullYear()} Dr. Mohamed Abdelsaboor. Made with</span>
-            <Heart size={16} className="text-error-500" />
+            <Heart size={16} className="ml-1 mr-1 text-error-500" aria-hidden />
             <span>All Rights Reserved.</span>
           </p>
         </div>
