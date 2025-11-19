@@ -43,6 +43,8 @@ const CertificateGallery = () => {
             <img
               src={cert.imagePath}
               alt={cert.title}
+              loading="lazy"
+              decoding="async"
               className="w-full h-48 object-cover"
             />
             <div className={`p-3 ${isDark ? 'bg-gray-800' : 'bg-white'}`}>
@@ -61,9 +63,13 @@ const CertificateGallery = () => {
             >
               <X size={24} />
             </button>
+
+            {/* الصورة الكبيرة بعد التعديل */}
             <img
               src={selectedCert.imagePath}
               alt={selectedCert.title}
+              loading="lazy"
+              decoding="async"
               className="w-full rounded-lg"
             />
           </div>

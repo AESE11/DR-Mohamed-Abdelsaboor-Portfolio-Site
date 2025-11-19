@@ -8,7 +8,8 @@ const HeroSection = () => {
   const isDark = theme === 'dark';
 
   // المسار الكامل للصورة بناءً على اسم الريبو على GitHub
-  const imagePath = '/dr-mohamed-abdelsaboor-portfolio1/images/doctor-new.jpg';
+  const basePath = '/dr-mohamed-abdelsaboor-portfolio1/';
+  const imagePath = `${basePath}images/doctor-new.jpg`;
 
   return (
     <section className="py-10 sm:py-14 md:py-20">
@@ -23,11 +24,13 @@ const HeroSection = () => {
               Dr. Mohamed Abdelsaboor
             </h1>
 
-            {/* الصورة تظهر فقط على شاشات صغيرة */}
+            {/* الصورة تظهر فقط على شاشات صغيرة (تم تعديل هذه الحتة فقط) */}
             <div className="mt-4 mb-6 lg:hidden max-w-xs mx-auto rounded-xl overflow-hidden shadow-lg">
               <img
-                src={`${basePath}images/doctor-doctor-new.jpg}
+                src={`${basePath}images/doctor-new.jpg`}
                 alt="Dr. Mohamed Abdelsaboor"
+                loading="lazy"
+                decoding="async"
                 className="object-cover w-full h-auto rounded-xl"
               />
             </div>
